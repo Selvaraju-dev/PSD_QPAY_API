@@ -4,6 +4,7 @@ using QPay.UI.Dashboard;
 using QPay.UI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,5 +33,6 @@ namespace QPay.BAL.IRepository
         Task<List<UserUI>> GetEmployeeByTeamLeaderId(int UserId);
         Task<FileResponse> InputReconAndYettoCome(string flag);
         Task<AdminDashboardUI> GetInvoiceDashboard(string InvoiceType);
+        Task<DataSet> GetInvoiceDashboardFileDownload(string InvoiceType);
     }
 }

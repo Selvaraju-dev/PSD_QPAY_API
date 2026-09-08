@@ -9,6 +9,7 @@ using QPay.UI.Admin;
 using QPay.UI.Common;
 using QPay.UI.Dashboard;
 using QPay.UI.Models;
+using QPay.UI.Models.Invoice;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -228,6 +229,25 @@ namespace QPay.BAL.Repository
             }
             return new List<BreakTimeDetailsUI>();
         }
+        public async Task<DataSet> GetInvoiceDashboardFileDownload(string InvoiceType)
+        {
+            FileResponse dashboardUI = new FileResponse();
+
+            string storeProcedure = string.Format("SP_Invoice_Dashboard_With_invoiceType");
+
+            //var parameter = new DynamicParameters();
+            //parameter.Add("@InvoiceType", InvoiceType);
+
+            var parameters = new Dictionary<string, object?>
+            {
+                ["@InvoiceType"] = InvoiceType
+
+            };
+           
+
+            return _dbRepository.ExecuteStoredProcedureToDataSetAsync("SP_Invoice_Initiation_search_Allot_Test", parameters, 1500);
+        }
+
         public async Task<AdminDashboardUI> GetInvoiceDashboard(string InvoiceType)
         {
             AdminDashboardUI dashboardUI = new AdminDashboardUI();

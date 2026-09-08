@@ -161,6 +161,7 @@ namespace QPay.UI.Models.Invoice
         public string? Service_Description { get; set; } = "";
         public string? Invoice_Number { get; set; } = "";
         public string? PRO_Invoice_Number { get; set; } = "";
+        public string? Merge_PRo_Number { get; set; } = "";
 
         public string? Id{ get; set; } = "";
 
