@@ -245,7 +245,7 @@ namespace QPay.BAL.Repository
             };
            
 
-            return _dbRepository.ExecuteStoredProcedureToDataSetAsync("SP_Invoice_Initiation_search_Allot_Test", parameters, 1500);
+            return _dbRepository.ExecuteStoredProcedureToDataSetAsync("SP_Invoice_Dashboard_With_invoiceType", parameters, 1500);
         }
 
         public async Task<AdminDashboardUI> GetInvoiceDashboard(string InvoiceType)
