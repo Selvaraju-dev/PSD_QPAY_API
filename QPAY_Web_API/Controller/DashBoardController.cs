@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QPay.BAL.IRepository;
@@ -116,11 +117,27 @@ namespace QPay.API.Controller
             {
                 var status = this._adminDashboardRepository.GetInvoiceDashboardFileDownload(InvoiceType).Result;
 
+                int i = 1;
+                using var workbook = new XLWorkbook();
                 foreach (var item in status.Tables)
                 {
-
+                    var ws = workbook.AddWorksheet("Dashboard" + i.ToString());
+                    ws.Table(0).ShowAutoFilter = false;
+                    ws.Table(0).Theme = XLTableTheme.None;
+                    i++;
                 }
-                return Ok(status);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var bytes = Convert.ToBase64String(stream.ToArray());
+                    FileResponse fileResponse = new FileResponse();
+                    string fileName = DateTime.Now.ToString("_yyyyMMddhhmmssffff");
+                    fileResponse.FileName = "InvoiceDashboardDetails" + fileName;
+                    fileResponse.File = bytes;
+
+                    return Ok(fileResponse);
+                }
+                
             }
         }
     }
