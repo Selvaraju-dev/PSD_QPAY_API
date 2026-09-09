@@ -108,7 +108,7 @@ namespace QPay.API.Controller
         [HttpGet, Route("InvoiceDashboard/{InvoiceType}")]
         public async Task<IActionResult> InvoiceDashboard(string InvoiceType)
         {
-            if (InvoiceType.Length > 1)
+            if (InvoiceType.Length == 1)
             {
                 var status = await this._adminDashboardRepository.GetInvoiceDashboard(InvoiceType);
                 return Ok(status);

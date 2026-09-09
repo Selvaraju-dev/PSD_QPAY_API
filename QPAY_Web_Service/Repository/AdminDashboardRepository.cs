@@ -241,7 +241,6 @@ namespace QPay.BAL.Repository
             var parameters = new Dictionary<string, object?>
             {
                 ["@InvoiceType"] = InvoiceType
-
             };
            
 
